@@ -1,8 +1,36 @@
 <html>
   <head>
-      <title>My first web sever</title>
+      <title>CppTont @zyc</title>
   </head>
   <body>
-      <p>Hello world!</p>
+      <h1 style="color:blue">你好！</h1>
+      <a href="#" id="jplg">个人入口：建平临港</a>
+      <form id="jplgInput" style="display:none;">
+          <label for="jplgPass">Enter Password:</label>
+          <input type="jplgPass" id="jplgPass" name="jplgPass">
+          <button type="submit">Submit</button>
+      </form>
+      <script>
+            // Get the elements
+            const link = document.getElementById('jplg');
+            const passwordForm = document.getElementById('jplgInput');
+            const passwordInput = document.getElementById('jplgPass');
+            
+            // Event listener for clicking the link
+            link.addEventListener('click', function() {
+              passwordForm.style.display = 'block';
+            });
+            
+            // Event listener for submitting the password form
+            passwordForm.addEventListener('submit', function(event) {
+              event.preventDefault();
+              const password = passwordInput.value;
+              if (password === 'password') {
+                window.location.href = 'https://cpptony.github.io/jplg/index.html';
+              } else {
+                 alert('Incorrect password. Please try again.');
+              }
+            });
+      </script>
   </body>
 </html>
