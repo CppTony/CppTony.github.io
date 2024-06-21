@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兴潮小镇</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #005bb5;
+            padding: 0.5em;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1em;
+        }
+        main {
+            padding: 2em;
+            text-align: center;
+        }
+        .highlight {
+            color: #0073e6;
+        }
+        .map-container {
+            margin: 2em 0;
+            height: 400px;
+            background-color: #ddd;
+        }
+        footer {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>欢迎来到兴潮小镇</h1>
+    <p>东海之滨的美食天堂，上海芦潮港港口的特色小镇</p>
+</header>
+
+<nav>
+    <a href="#home">首页</a>
+    <a href="#about">关于我们</a>
+    <a href="#events">活动</a>
+    <a href="#contact">联系我们</a>
+</nav>
+
+<main>
+    <section id="home" class="section active">
+        <h2>欢迎来到兴潮小镇</h2>
+        <p>东海之滨的美食天堂，上海芦潮港港口的特色小镇。</p>
+        <div class="map-container">
+            <p>园区地图预留区域</p>
+            <img src="map.png" alt="园区地图">
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>关于兴潮小镇</h2>
+        <p>兴潮小镇坐落于上海芦潮港港口，毗邻著名的海昌公园，但我们的主题是<em>吃、喝</em>。我们时常举办各种<em class="highlight">海鲜主题活动</em>，让您尽享美味。</p>
+    </section>
+
+    <section id="events" class="section">
+        <h2>即将举行的活动</h2>
+        <ul>
+            <li>六月海鲜节 - 2024年6月15日</li>
+            <li>夏季烧烤派对 - 2024年7月20日</li>
+            <li>螃蟹盛宴 - 2024年9月10日</li>
+        </ul>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>联系我们</h2>
+        <p>如果您有任何问题或建议，请通过以下方式联系我们。</p>
+        <p>电话: 123-456-7890</p>
+        <p>邮箱: info@xingchaotown.com</p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 兴潮小镇 | 由 兴潮团队 精心打造（模板不可用） 部分代码由AI生成</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function showSection() {
+            var hash = window.location.hash || '#home';
+            document.querySelectorAll('.section').forEach(function(section) {
+                section.classList.remove('active');
+            });
+            var activeSection = document.querySelector(hash);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+        }
+
+        window.addEventListener('hashchange', showSection);
+        showSection();
+    });
+</script>
+
+</body>
+</html>
