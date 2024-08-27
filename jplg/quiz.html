@@ -1,0 +1,362 @@
+<!DOCTYPE html>  
+<html lang="zh-CN">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>测试试卷 - 题目</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #f9f9f9;  
+            text-align: center;  
+        }  
+        .navbar {  
+            margin-top: 20px;  
+        }  
+        .dot {  
+            display: inline-block;  
+            width: 20px;  
+            height: 20px;  
+            margin: 5px;  
+            border-radius: 50%;  
+            cursor: pointer;  
+        }  
+        .incomplete {  
+            background-color: rgb(45, 45, 44); /* Incomplete */  
+        }  
+        .complete {  
+            background-color: green; /* Complete */  
+        }  
+        .completing {  
+            background-color: red; /* Completing */  
+        }  
+        .question-container {  
+            padding: 20px;  
+            background-color: #fff;  
+            border-radius: 10px;  
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);  
+            margin: 20px auto;  
+            width: 80%;  
+            position: relative;  
+        }  
+        .submit-button {  
+            position: absolute;  
+            bottom: 20px;  
+            right: 20px;  
+            padding: 10px 20px;  
+            background-color: blue;  
+            color: white;  
+            border: none;  
+            border-radius: 5px;  
+            cursor: pointer;  
+        }  
+        .submit-button:disabled {  
+            background-color: gray;  
+            cursor: not-allowed;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="navbar">  
+        <a href="#1" class="dot" onclick="navigateToQuestion(1)"></a>  
+        <a href="#2" class="dot" onclick="navigateToQuestion(2)"></a>  
+        <a href="#3" class="dot" onclick="navigateToQuestion(3)"></a>  
+        <a href="#4" class="dot" onclick="navigateToQuestion(4)"></a>  
+        <a href="#5" class="dot" onclick="navigateToQuestion(5)"></a>  
+        <a href="#6" class="dot" onclick="navigateToQuestion(6)"></a>  
+        <a href="#7" class="dot" onclick="navigateToQuestion(7)"></a>  
+        <a href="#8" class="dot" onclick="navigateToQuestion(8)"></a>  
+        <a href="#9" class="dot" onclick="navigateToQuestion(9)"></a>  
+        <a href="#10" class="dot" onclick="navigateToQuestion(10)"></a>  
+        <a href="#11" class="dot" onclick="navigateToQuestion(11)"></a>  
+        <a href="#12" class="dot" onclick="navigateToQuestion(12)"></a>
+        <a href="#12" class="dot" onclick="navigateToQuestion(13)"></a>  
+        <a href="#12" class="dot" onclick="navigateToQuestion(14)"></a>  
+    </div>  
+
+    <div class="question-container" id="question-container">  
+    </div>  
+
+    <h2>测试时有可能遇到写入的答案点到别处在回来时失灵的情况，请尽量<b>一次性作答</b>，带来不便请谅解。</h2>
+
+    <script>  
+        const questions = [  
+            {
+                id: 1,
+                title: "a-口号掌握基本考察",
+                type: "fill-in-the-blank",
+                chapter: "文学艺术修养-(I - 押韵基本能力)" ,
+                content: "蟑螂精选，（<input type='text' onchange='recordAnswer(1, this.value, 0)' placeholder='在这里填写' />）" 
+            },
+            {
+                id: 2,
+                title: "“民歌民谣”我来传达1",
+                type: "fill-in-the-blank",
+                chapter: "b-文学艺术修养-(I - 押韵基本能力)" ,
+                content:  "王王果汁宣传片：王王果汁大黑店，不卖（<input type='text' onchange='recordAnswer(2, this.value, 0)'/>）。专业（<input type='text' onchange='recordAnswer(2, this.value, 1)'/>）十余年，（<input type='text' onchange='recordAnswer(2, this.value, 2)'/>）。",
+            },
+            {
+                id: 3,
+                title: "c-以下句子属于？期待下一场足够证明我的能力，那就下一场帮我对手修好坟地。",
+                type: "multiple-choice",
+                chapter: "文学艺术修养-(I - 押韵基本能力)" ,
+                options: ["单押", "双押", "三押", "不押韵"] 
+            },
+            {
+                id: 4,
+                title: `<p style = "color: blue;">
+                    d-请写一首关于美好八二班生活（积极向上，保留最终解释权）的打油诗，
+                    14行，每行两句，近体诗，不限字数。每行各设韵脚，邻行之间韵脚不许相同，
+                    每行两句的末字不得声母（辅音）相同，韵母（元音）必须相同，且必须声调
+                    相同（如“‘火’与‘妥’”）。诗中所有事例必须出自郑氏<a href="yizhi.html">
+                    《聊斋益智》</a>，起名规则参见王氏<a href="youyi.html">
+                    《有疑赛》</a>（第一版正版主赛场，新华出版社）。
+                    </p>
+                `,
+                type: "fill-in-the-blank",
+                chapter: "文学艺术修养-(I - 押韵基本能力)",
+                content: `
+（<input type='text' onchange='recordAnswer(4, this.value, 0)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 1)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 2)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 3)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 4)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 5)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 6)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 7)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 8)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 9)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 10)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 11)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 12)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 13)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 14)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 15)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 16)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 17)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 18)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 19)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 20)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 21)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 22)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 23)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 24)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 25)' placeholder='在这里填写' />）
+。<br>
+
+（<input type='text' onchange='recordAnswer(4, this.value, 26)' placeholder='在这里填写' />）
+,（<input type='text' onchange='recordAnswer(4, this.value, 27)' placeholder='在这里填写' />）
+。<br>
+                `
+            },
+            {
+                id: 5,
+                title: "填空问答",
+                chapter: "文学艺术修养-(II - 《三体》)",
+                type: "fill-in-the-blank",
+                content: `
+                为什么你的房间这么乱？--（<input type='text' onchange='recordAnswer(5, this.value, 0)' placeholder='在这里填写' />)
+                <br>
+                罗辑最擅长做的事：--（<input type='text' onchange='recordAnswer(5, this.value, 1)' placeholder='在这里填写' />)
+                <br>
+                如果你想成为罗辑的破壁人，你需要做什么？--（<input type='text' onchange='recordAnswer(5, this.value, 2)' placeholder='在这里填写' />)
+                `
+            },
+            {
+                id: 6,
+                title : "看图识物",
+                chapter: "文学艺术修养-(II - 《三体》)",
+                type: "fill-in-the-blank",
+                content: `
+                    <img src="waterDrop.png"><br>
+                    此物为何(正式名称)？<br><input type='text' onchange='recordAnswer(6, this.value, 0)' placeholder='在这里填写' />
+                    <p>A: 水滴💧</p><br>
+                    <p>B: H2O(一氧化二氢,一种化学物质，可溶于水)</p><br>
+                    <p>C: 有机超能γ射线（及中微子）释放器，属《万有引力号》（水滴）</p><br>
+                    <p>D: 强互作用力宇宙探测器</p><br>
+                `
+            },
+            {
+                id: 7,
+                title: "我们班的最佳书法画作是？",
+                chapter: "文学艺术修养-(III - 书法鉴赏)",
+                type: "multiple-choice",
+                options: ["1+1=2","山顶见","爱心卖艺","《望岳》"],
+            },
+            {
+                id: 8,
+                title: "鼓掌👏的正确姿势：",
+                type: "multiple-choice",
+                chapter: "气氛组",
+                options: ["右手握拳，左手点头","左手握拳，右手点头","双手合十，点头，然后左手握拳，右手点头", "就这么鼓！"]
+            },
+            {
+                id: 9,
+                title: "欢呼时的注意事项",
+                type: "multiple-choice",
+                chapter: "气氛组",
+                options: ["保持微笑","保持镇定","保持礼貌","保持专注", "不能有弹舌pppppppp..."]
+            },
+            {
+                id: 10,
+                title: "打气加油的正确姿势 <img src=\"addOil.gif\">",
+                type: "multiple-choice",
+                chapter: "气氛组",
+                options: ["✔","×"]
+            },
+
+            {
+                id: 11,
+                title: "魔方速拧通常指的是？",
+                type: "multiple-choice",
+                chapter: "社区问题",
+                options: ["flower-cross-bottom-F2L-OLL-PLL", "CFOP", "4*4*4", "HGCD"]
+            },
+
+            {
+                id: 12,
+                title: "你应该对食死徒说？",
+                type: "multiple-choice",
+                chapter: "社区问题",
+                options: ["阿瓦达思密达", "尸骨再现", "Avada Kedavra", "钻心刺骨"]
+            },
+
+            {
+                id: 13,
+                title: "下列哪个是空客的飞机？",
+                type: "multiple-choice",
+                chapter: "社区问题",
+                options: ["A380", "747-400", "747-8", "747-240"]
+            },
+
+            {
+                id: 14,
+                title: "幼儿园数学题",
+                type: "multiple-choice",
+                chapter: "社区问题",
+                options: ["1+1=?","证明“1+1”","求sin(x^x)的积分","求解x^2-1=0"]
+            }
+        ];  
+
+        const answers = Array.from({ length: questions.length }, () => []); // Array to hold user answers  
+
+        function loadQuestion() {  
+            const hash = window.location.hash;  
+            const questionId = hash ? parseInt(hash.substring(1)) : 1;  
+            const question = questions.find(q => q.id === questionId);  
+            const questionContainer = document.getElementById('question-container');  
+
+            if (question) {  
+                let content = question.content;   
+
+                // 处理填空题  
+                if (question.type === "fill-in-the-blank") {  
+                    content = content.replace(/<input type='text'/g, `<input type='text' value='${answers[questionId - 1][0] || ''}' `);  
+                }  
+
+                // 处理选择题  
+                if (question.type === "multiple-choice") {  
+                    content = question.options.map((option, index) => {  
+                        const checked = answers[questionId - 1][0] === option ? 'checked' : '';  
+                        return `<label><input type='radio' name='question${questionId}' value='${option}' onchange='recordAnswer(${questionId}, this.value, 0)' ${checked}> ${option}</label><br>`;  
+                    }).join('');  
+                }  
+
+                questionContainer.innerHTML = `
+                    <h1>${question.chapter}<h1>  
+                    <h2>${question.title}</h2>  
+                    <p>${content}</p>  
+                    <div>  
+                        ${questionId > 1 ? `<button onclick="previousQuestion(${questionId})">上一题</button>` : ''}  
+                        <button onclick="nextQuestion(${questionId})">下一题</button>  
+                    </div>  
+                    <button class="submit-button" id="submit-button" onclick="submitQuiz()" ${isQuizCompleted() ? '' : 'disabled'}>提交问卷</button>  
+                `;  
+            } else {  
+                questionContainer.innerHTML = "<p>没有找到该题目。</p>";  
+            }  
+            updateDots(questionId);  
+        }  
+
+        function recordAnswer(questionId, selectedOption, blankIndex) {  
+            answers[questionId - 1][blankIndex] = selectedOption; // Store fill-in answer or selected option  
+            updateDots(questionId); // Update dot colors  
+        }  
+
+        function updateDots(currentQuestionId) {  
+            const dots = document.querySelectorAll('.dot');  
+            dots.forEach(dot => dot.classList.remove('incomplete', 'complete', 'completing'));  
+            dots.forEach((dot, index) => {  
+                const status = answers[index];  
+                if (index + 1 === currentQuestionId) {  
+                    dot.classList.add('completing');  // 当前问题为“进行中”的状态  
+                } else if (status.length === 0 || (status.length === 1 && status[0] === undefined)) {  
+                    dot.classList.add('incomplete');  // 未答题的状态  
+                } else {  
+                    dot.classList.add('complete');  // 已答题的状态  
+                }  
+            });  
+        }  
+
+        function nextQuestion(currentId) {  
+            const nextId = currentId < questions.length ? currentId + 1 : 1; // Loop back to the first question  
+            window.location.hash = nextId;  
+            loadQuestion();  
+        }  
+
+        function previousQuestion(currentId) {  
+            const prevId = currentId > 1 ? currentId - 1 : questions.length; // Loop back to the last question  
+            window.location.hash = prevId;  
+            loadQuestion();  
+        }  
+
+        function isQuizCompleted() { 
+            return answers.every(answer => answer.length > 0 && !answer.includes(undefined));  
+        }  
+
+        function submitQuiz() {  
+            if (isQuizCompleted()) {  
+                const queryString = answers.map((answer, index) =>
+                    `question${index + 1}=`
+                    + answer.map(a => 
+                        encodeURIComponent(a)
+                    ).join(',')
+                ).join('&');  
+                const destination = "complete.html?" + queryString; // Redirect to complete.html with answers  
+                window.location.href = destination;  
+            }  
+        }  
+
+        function navigateToQuestion(questionId) {  
+            window.location.hash = questionId;  
+            loadQuestion();  
+        }  
+
+        window.addEventListener('load', loadQuestion);  
+    </script>  
+</body>  
+</html>

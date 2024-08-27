@@ -1,0 +1,40 @@
+<!DOCTYPE html>  
+<html lang="zh-CN">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>问卷完成</title>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>  
+</head>  
+<body>  
+    <h1>感谢您的参与！</h1>  
+    <p>请将加密答案发送到"新咸鱼群"或“跨年群”，或私信zyc，会尽快给予回复。（如若没有回复请再发一遍）</p>
+    <div id="answers-container"></div>  
+    <div id="encrypted-output"></div>  
+
+    <script>  
+        const urlParams = new URLSearchParams(window.location.search);  
+        const answersContainer = document.getElementById('answers-container');  
+        const encryptedOutput = document.getElementById('encrypted-output');  
+
+        // 收集所有答案  
+        let allAnswers = '';  
+        for (let i = 1; i <= 12; i++) {  
+            const answer = urlParams.get(`question${i}`);  
+            if (answer) {  
+                allAnswers += decodeURIComponent(answer) + '&'; // 用空格分隔答案  
+            }  
+        }  
+
+        // 随机生成密钥  
+        const randomKey = Math.random().toString(36).slice(2); // 生成简单的随机密钥  
+        // 使用 AES 加密答案  
+        const encrypted = CryptoJS.AES.encrypt(allAnswers.trim(), randomKey).toString();  
+        const baifenhao = "$";
+
+        // 显示原始答案和密钥  
+        answersContainer.innerHTML = `<p>所有答案: ${allAnswers.trim()}</p>`;  
+        encryptedOutput.innerHTML = `<p>加密答案 : ${randomKey}${baifenhao}${encrypted}</p>`;  
+    </script>  
+</body>  
+</html>
